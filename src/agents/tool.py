@@ -10,9 +10,9 @@ from openai.types.responses.file_search_tool_param import Filters, RankingOption
 from openai.types.responses.response_output_item import LocalShellCall, McpApprovalRequest
 from openai.types.responses.tool_param import CodeInterpreter, ImageGeneration, Mcp
 from openai.types.responses.web_search_tool_param import UserLocation
+from openai.types.responses import ResponseComputerToolCall, ResponseFunctionToolCall
 from pydantic import ValidationError
 from typing_extensions import Concatenate, NotRequired, ParamSpec, TypedDict
-
 from . import _debug
 from .computer import AsyncComputer, Computer
 from .exceptions import ModelBehaviorError
@@ -243,6 +243,19 @@ Tool = Union[
 ]
 """A tool that can be used in an agent."""
 
+@dataclass
+class ToolRunFunction:
+    tool_call: ResponseFunctionToolCall
+    function_tool: FunctionTool
+
+
+@dataclass
+class ToolRunComputerAction:
+    tool_call: ResponseComputerToolCall
+    computer_tool: ComputerTool
+
+Action = Union[ToolRunFunction, ToolRunComputerAction]
+"""An action that can be performed by an agent. It contains the tool call and the tool"""
 
 def default_tool_error_function(ctx: RunContextWrapper[Any], error: Exception) -> str:
     """The default tool error function, which just returns a generic error message."""

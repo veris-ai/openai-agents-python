@@ -535,17 +535,17 @@ class RunImpl:
         context_wrapper: RunContextWrapper[TContext],
         config: RunConfig,
     ) -> list[FunctionToolResult]:
-        async def run_single_tool(
-            func_tool: FunctionTool, tool_call: ResponseFunctionToolCall
-        ) -> Any:
+        async def run_single_tool(action: ToolRunFunction) -> Any:
+            func_tool = action.function_tool
+            tool_call = action.tool_call
             with function_span(func_tool.name) as span_fn:
                 if config.trace_include_sensitive_data:
                     span_fn.span_data.input = tool_call.arguments
                 try:
                     _, _, result = await asyncio.gather(
-                        hooks.on_tool_start(context_wrapper, agent, func_tool),
+                        hooks.on_tool_start(context_wrapper, agent, action),
                         (
-                            agent.hooks.on_tool_start(context_wrapper, agent, func_tool)
+                            agent.hooks.on_tool_start(context_wrapper, agent, action)
                             if agent.hooks
                             else _coro.noop_coroutine()
                         ),
@@ -577,8 +577,7 @@ class RunImpl:
 
         tasks = []
         for tool_run in tool_runs:
-            function_tool = tool_run.function_tool
-            tasks.append(run_single_tool(function_tool, tool_run.tool_call))
+            tasks.append(run_single_tool(tool_run))
 
         results = await asyncio.gather(*tasks)
 
@@ -1000,9 +999,9 @@ class ComputerAction:
         )
 
         _, _, output = await asyncio.gather(
-            hooks.on_tool_start(context_wrapper, agent, action.computer_tool),
+            hooks.on_tool_start(context_wrapper, agent, action),
             (
-                agent.hooks.on_tool_start(context_wrapper, agent, action.computer_tool)
+                agent.hooks.on_tool_start(context_wrapper, agent, action)
                 if agent.hooks
                 else _coro.noop_coroutine()
             ),
