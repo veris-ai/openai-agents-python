@@ -75,6 +75,7 @@ from .tool import (
     WebSearchTool,
     default_tool_error_function,
     function_tool,
+    Action,
 )
 from .tracing import (
     AgentSpanData,
@@ -239,6 +240,7 @@ __all__ = [
     "MCPToolApprovalRequest",
     "MCPToolApprovalFunctionResult",
     "function_tool",
+    "Action",
     "Usage",
     "add_trace_processor",
     "agent_span",
