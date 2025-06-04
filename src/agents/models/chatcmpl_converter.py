@@ -285,7 +285,7 @@ class Converter:
         def ensure_assistant_message() -> ChatCompletionAssistantMessageParam:
             nonlocal current_assistant_msg
             if current_assistant_msg is None:
-                current_assistant_msg = ChatCompletionAssistantMessageParam(role="assistant")
+                current_assistant_msg = ChatCompletionAssistantMessageParam(role="assistant", content=None)
                 current_assistant_msg["tool_calls"] = []
             return current_assistant_msg
 
