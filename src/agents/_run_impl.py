@@ -546,9 +546,9 @@ class RunImpl:
                     span_fn.span_data.input = tool_call.arguments
                 try:
                     _, _, result = await asyncio.gather(
-                        hooks.on_tool_start(context_wrapper, agent, action),
+                        hooks.on_tool_start(tool_context, agent, action),
                         (
-                            agent.hooks.on_tool_start(context_wrapper, agent, action)
+                            agent.hooks.on_tool_start(tool_context, agent, action)
                             if agent.hooks
                             else _coro.noop_coroutine()
                         ),
