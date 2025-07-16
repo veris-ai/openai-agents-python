@@ -6,6 +6,7 @@ from collections.abc import Awaitable
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Callable, Literal, Union, overload
 
+from openai.types.responses import ResponseFunctionToolCall
 from openai.types.responses.file_search_tool_param import Filters, RankingOptions
 from openai.types.responses.response_computer_tool_call import (
     PendingSafetyCheck,
@@ -16,7 +17,6 @@ from openai.types.responses.tool_param import CodeInterpreter, ImageGeneration, 
 from openai.types.responses.web_search_tool_param import UserLocation
 from pydantic import ValidationError
 from typing_extensions import Concatenate, NotRequired, ParamSpec, TypedDict
-from openai.types.responses import ResponseComputerToolCall, ResponseFunctionToolCall
 
 from . import _debug
 from .computer import AsyncComputer, Computer

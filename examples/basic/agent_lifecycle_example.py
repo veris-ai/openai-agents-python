@@ -4,7 +4,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from agents import Agent, AgentHooks, RunContextWrapper, Runner, Tool, Action, function_tool
+from agents import Action, Agent, AgentHooks, RunContextWrapper, Runner, Tool, function_tool
 
 
 class CustomAgentHooks(AgentHooks):

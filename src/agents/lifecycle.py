@@ -4,7 +4,7 @@ from typing_extensions import TypeVar
 
 from .agent import Agent, AgentBase
 from .run_context import RunContextWrapper, TContext
-from .tool import Tool, Action
+from .tool import Action, Tool
 
 TAgent = TypeVar("TAgent", bound=AgentBase, default=AgentBase)
 

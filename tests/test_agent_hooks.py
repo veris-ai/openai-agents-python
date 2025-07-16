@@ -7,7 +7,7 @@ from typing import Any
 import pytest
 from typing_extensions import TypedDict
 
-from agents.agent import Agent, Action
+from agents.agent import Action, Agent
 from agents.lifecycle import AgentHooks
 from agents.run import Runner
 from agents.run_context import RunContextWrapper, TContext

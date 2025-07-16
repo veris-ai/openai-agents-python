@@ -23,8 +23,8 @@ from openai.types.responses.response_computer_tool_call import (
 )
 
 from agents import (
-    Agent,
     Action,
+    Agent,
     AgentHooks,
     AsyncComputer,
     Computer,
@@ -34,9 +34,8 @@ from agents import (
     RunHooks,
 )
 from agents._run_impl import ComputerAction, RunImpl
-from agents.tool import ToolRunComputerAction
 from agents.items import ToolCallOutputItem
-from agents.tool import ComputerToolSafetyCheckData
+from agents.tool import ComputerToolSafetyCheckData, ToolRunComputerAction
 
 
 class LoggingComputer(Computer):

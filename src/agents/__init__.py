@@ -58,6 +58,7 @@ from .stream_events import (
     StreamEvent,
 )
 from .tool import (
+    Action,
     CodeInterpreterTool,
     ComputerTool,
     FileSearchTool,
@@ -75,7 +76,6 @@ from .tool import (
     WebSearchTool,
     default_tool_error_function,
     function_tool,
-    Action,
 )
 from .tracing import (
     AgentSpanData,
