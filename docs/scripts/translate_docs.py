@@ -228,7 +228,7 @@ def translate_file(file_path: str, target_path: str, lang_code: str) -> None:
                 model=OPENAI_MODEL,
                 instructions=instructions,
                 input=chunk,
-                reasoning={"effort": "high"},
+                reasoning={"effort": "low"},
                 text={"verbosity": "low"},
             )
             translated_content.append(response.output_text)
